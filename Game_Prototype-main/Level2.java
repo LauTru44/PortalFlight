@@ -16,6 +16,20 @@ public class Level2 extends World
     public Level2()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(600, 500, 1); 
+        super(1000, 600, 1); 
+        prepare();
+    }
+    /**
+     * Prepare the world for the start of the program.
+     * That is: create the initial objects and add them to the world.
+     */
+    private void prepare()
+    {
+        CaveGround caveGround = new CaveGround();
+        addObject(caveGround,494,564);
+        caveGround.setLocation(494,591);
+        caveGround.setLocation(503,598);
+        caveGround.setLocation(503,591);
+        caveGround.setLocation(504,591);
     }
 }

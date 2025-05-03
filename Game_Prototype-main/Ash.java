@@ -86,7 +86,7 @@ public class Ash extends Actor
         double timeSplashScreen = System.currentTimeMillis();
         if (fireball != null) {
             getWorld().addObject(new Ash() , getX(), getY());
-            Greenfoot.setWorld(new GameOver()); 
+            Greenfoot.setWorld(new TheEnd()); 
         }
     }
 }

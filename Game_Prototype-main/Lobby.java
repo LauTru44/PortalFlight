@@ -16,7 +16,7 @@ public class Lobby extends World
     public Lobby()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(600, 400, 1); 
+        super(1000, 600, 1); 
         prepare();
     }
     
@@ -28,13 +28,17 @@ public class Lobby extends World
     {
         setPaintOrder(Ash.class, ground.class);
 
-        ground ground = new ground();
-        addObject(ground,300,348);
         Ash ash = new Ash();
         addObject(ash,67,296);
-        ground.setLocation(300,380);
-        ash.setLocation(39,18);
+        ground ground = new ground();
+        addObject(ground,500,585);
         LavaPortal lavaPortal = new LavaPortal();
-        addObject(lavaPortal,297,268);
+        addObject(lavaPortal,337,481);
+        CavePortal cavePortal = new CavePortal();
+        addObject(cavePortal,471,479);
+        OverworldPortal overworldPortal = new OverworldPortal();
+        addObject(overworldPortal,603,479);
+        ExitPortal exitPortal = new ExitPortal();
+        addObject(exitPortal,756,468);
     }
 }

@@ -16,9 +16,10 @@ public class Level3 extends World
     public Level3()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(600, 500, 1); 
+        super(1000, 550, 1); 
         prepare();
     }
+    
     /**
      * Prepare the world for the start of the program.
      * That is: create the initial objects and add them to the world.
@@ -79,5 +80,7 @@ public class Level3 extends World
         coin19.setLocation(172,101);
         Coin coin20 = new Coin();
         addObject(coin20,288,95);
+        ground ground = new ground();
+        addObject(ground,499,548);
     }
 }

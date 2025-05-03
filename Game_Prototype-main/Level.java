@@ -17,7 +17,7 @@ public class Level extends World
     public Level()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(600, 400, 1); 
+        super(1000, 550, 1); 
         prepare();
         showTimer();
 
@@ -49,10 +49,17 @@ public class Level extends World
         fire2.setLocation(522,108);
         Ash ash = new Ash();
         addObject(ash,55,73);
-        groundlvl groundlvl = new groundlvl();
-        addObject(groundlvl,300,378);
-        groundlvl.setLocation(300,378);
-        groundlvl.setLocation(300,378);
+        ground ground = new ground();
+        addObject(ground,505,526);
+        removeObject(ground);
+        FireGround fireGround = new FireGround();
+        addObject(fireGround,577,510);
+        fireGround.setLocation(500,551);
+        fireGround.setLocation(500,548);
+        fireGround.setLocation(500,540);
+        fireGround.setLocation(500,537);
+        fireGround.setLocation(500,538);
+        fireGround.setLocation(500,547);
     }
 
     public void act(){
