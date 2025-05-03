@@ -19,6 +19,7 @@ public class Level2 extends World
         super(1000, 600, 1); 
         prepare();
     }
+    
     /**
      * Prepare the world for the start of the program.
      * That is: create the initial objects and add them to the world.
@@ -31,5 +32,7 @@ public class Level2 extends World
         caveGround.setLocation(503,598);
         caveGround.setLocation(503,591);
         caveGround.setLocation(504,591);
+        Ash ash = new Ash();
+        addObject(ash,41,64);
     }
 }

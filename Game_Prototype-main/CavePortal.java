@@ -1,19 +1,26 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;
 
-/**
- * Write a description of class CavePortal here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
-public class CavePortal extends LavaPortal
+public class CavePortal extends Actor
 {
-    /**
-     * Act - do whatever the CavePortal wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+    private long timeTouched = 0;
+    private boolean touchingAsh = false;
+
     public void act()
     {
-        // Add your action code here.
+        if (isTouching(Ash.class)) {
+            if (!touchingAsh) {
+                timeTouched = System.currentTimeMillis();
+                touchingAsh = true;
+            } else {
+                long elapsed = System.currentTimeMillis() - timeTouched;
+                if (elapsed >= 2000) {
+                    Greenfoot.setWorld(new Level2()); // Lava portal goes to Level
+                }
+            }
+        } else {
+            touchingAsh = false;
+            timeTouched = 0;
+        }
     }
 }
+

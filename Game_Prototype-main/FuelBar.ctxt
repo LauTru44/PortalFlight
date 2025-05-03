@@ -1,0 +1,9 @@
+#BlueJ class context
+comment0.target=FuelBar
+comment1.params=
+comment1.target=void\ act()
+comment2.params=currentFuel\ maxFuel
+comment2.target=void\ updateFuel(int,\ int)
+comment3.params=
+comment3.target=void\ updateImage()
+numComments=4

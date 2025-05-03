@@ -1,19 +1,28 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-/**
- * Write a description of class OverworldPortal here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
-public class OverworldPortal extends LavaPortal
+import greenfoot.*;
+
+public class OverworldPortal extends Actor
 {
-    /**
-     * Act - do whatever the OverworldPortal wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+    private long timeTouched = 0;
+    private boolean touchingAsh = false;
+
     public void act()
     {
-        // Add your action code here.
+        if (isTouching(Ash.class)) {
+            if (!touchingAsh) {
+                timeTouched = System.currentTimeMillis();
+                touchingAsh = true;
+            } else {
+                long elapsed = System.currentTimeMillis() - timeTouched;
+                if (elapsed >= 2000) {
+                    Greenfoot.setWorld(new Level3()); // Lava portal goes to Level
+                }
+            }
+        } else {
+            touchingAsh = false;
+            timeTouched = 0;
+        }
     }
 }
+

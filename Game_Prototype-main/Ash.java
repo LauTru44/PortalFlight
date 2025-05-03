@@ -8,24 +8,40 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Ash extends Actor
 {
+    //movement fields
     private int yVelocity = 0;
     private int gravity = 1;
     private int jumpStrength = -10;
     private int speed = 4;
     private boolean onGround = false;
- 
+     
+    //portal analisis fields
     private long timeEnteredPortal = 0;
     private boolean isTouchingPortal = false;
     
+    //jetpack fields
+    private int maxFuel = 80;
+    private int fuel = maxFuel;
+    private int jetpackPower = -5; // negative to go up
+    private double fuelRechargeRate = 1;
+    private int fuelUsageRate = 2;
+    private FuelBar fuelBar;
+    
+    private boolean fuelEmpty = false;
+    private long timeFuelEmptied = 0;
+    private boolean isCoolingDown = false;
+    private int cooldownDuration = 1500; // 5 seconds in milliseconds
+    
     public void act()
     {
-        
         moveLeftRight();
-        applyGravity();
+        useJetpack();         
+        applyGravity();      
         checkIfOnGround();
-        jump();
-        checkLavaPortal();
+
         checkCollision();
+        rechargeFuel();
+        updateFuelBar();
     }
     
    private void moveLeftRight() {
@@ -48,6 +64,44 @@ public class Ash extends Actor
         setLocation(getX(), getY() + yVelocity);
         yVelocity += gravity;
     }
+    
+    private void useJetpack() {
+        if (fuel >= fuelUsageRate && Greenfoot.isKeyDown("space") && !isCoolingDown) {
+        yVelocity = jetpackPower;
+        fuel -= fuelUsageRate;
+
+        if (fuel <= 0) {
+            fuel = 0;
+            fuelEmpty = true;
+            isCoolingDown = true;
+            timeFuelEmptied = System.currentTimeMillis();
+        }
+        }
+    }
+    
+    private void rechargeFuel() {
+        if (isCoolingDown) {
+        long timeSinceEmpty = System.currentTimeMillis() - timeFuelEmptied;
+        if (timeSinceEmpty >= cooldownDuration) {
+            isCoolingDown = false;
+            fuelEmpty = false;
+        }
+        } else if (fuel < maxFuel) {
+        fuel += fuelRechargeRate;
+        if (fuel > maxFuel) fuel = maxFuel;
+        }
+    }
+    
+    private void updateFuelBar() {
+        if (fuelBar == null) {
+        fuelBar = new FuelBar();
+        getWorld().addObject(fuelBar, getX(), getY() - 30);
+        } else {
+        fuelBar.setLocation(getX(), getY() - 30);
+        fuelBar.updateFuel(fuel, maxFuel);
+        }
+    }
+    
 
      private void checkLavaPortal() {
         if (isTouching(LavaPortal.class)) {

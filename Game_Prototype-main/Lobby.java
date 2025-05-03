@@ -30,6 +30,7 @@ public class Lobby extends World
 
         Ash ash = new Ash();
         addObject(ash,67,296);
+        ash.setLocation(34,180);
         ground ground = new ground();
         addObject(ground,500,585);
         LavaPortal lavaPortal = new LavaPortal();
@@ -40,5 +41,6 @@ public class Lobby extends World
         addObject(overworldPortal,603,479);
         ExitPortal exitPortal = new ExitPortal();
         addObject(exitPortal,756,468);
+        exitPortal.setLocation(792,468);
     }
 }
