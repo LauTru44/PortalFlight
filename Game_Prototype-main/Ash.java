@@ -14,6 +14,13 @@ public class Ash extends Actor
     private int jumpStrength = -10;
     private int speed = 4;
     private boolean onGround = false;
+    
+    private GreenfootImage walk1 = new GreenfootImage("leftWalkingAsh1.png");
+    private GreenfootImage walk2 = new GreenfootImage("leftWalkingAsh2.png");
+    private GreenfootImage walk3 = new GreenfootImage("rightWalkingAsh1.png");
+    private GreenfootImage walk4 = new GreenfootImage("rightWalkingAsh2.png");
+    private int animationDelay = 0;  // controls speed of the walkng animation
+    private int animationSpeed = 20; 
      
     //portal analisis fields
     private long timeEnteredPortal = 0;
@@ -32,6 +39,8 @@ public class Ash extends Actor
     private boolean isCoolingDown = false;
     private int cooldownDuration = 1500; // 5 seconds in milliseconds
     
+    private int coinsCollected = 0;
+    
     public void act()
     {
         moveLeftRight();
@@ -42,14 +51,38 @@ public class Ash extends Actor
         checkCollision();
         rechargeFuel();
         updateFuelBar();
+        
+        checkCoinPickup();
     }
     
    private void moveLeftRight() {
         if (Greenfoot.isKeyDown("a")) {
+            
             setLocation(getX() - speed, getY());
+            
+            animationDelay++;
+            if (animationDelay >= animationSpeed) {
+            if (getImage() == walk1) {
+                setImage(walk2);
+            } else {
+                setImage(walk1);
+            }
+            animationDelay = 0;
+            }
         }
+        
         if (Greenfoot.isKeyDown("d")) {
             setLocation(getX() + speed, getY());
+            animationDelay++;
+            if (animationDelay >= animationSpeed) {
+                
+            if (getImage() == walk3) {
+            setImage(walk4);
+            } else {
+            setImage(walk3);
+            }
+            animationDelay = 0;
+            }
         }
     }
 
@@ -97,29 +130,11 @@ public class Ash extends Actor
         fuelBar = new FuelBar();
         getWorld().addObject(fuelBar, getX(), getY() - 30);
         } else {
-        fuelBar.setLocation(getX(), getY() - 30);
+        fuelBar.setLocation(getX(), getY() - 55);
         fuelBar.updateFuel(fuel, maxFuel);
         }
     }
     
-
-     private void checkLavaPortal() {
-        if (isTouching(LavaPortal.class)) {
-            if (!isTouchingPortal) {
-                // First frame of contact: store the current time
-                timeEnteredPortal = System.currentTimeMillis();
-                isTouchingPortal = true;
-            } else {
-                long timeElapsed = System.currentTimeMillis() - timeEnteredPortal;
-                if (timeElapsed >= 2000) { // 2 seconds
-                    Greenfoot.setWorld(new Level());
-                }
-            }
-        } else {
-            isTouchingPortal = false;
-            timeEnteredPortal = 0;
-        }
-    }
     
     private void checkIfOnGround() {
         if (isTouching(ground.class)) {
@@ -143,4 +158,19 @@ public class Ash extends Actor
             Greenfoot.setWorld(new TheEnd()); 
         }
     }
+    
+        private void checkCoinPickup() {
+    Coin coin = (Coin) getOneIntersectingObject(Coin.class);
+    if (coin != null) {
+        getWorld().removeObject(coin);
+        coinsCollected++;
+
+        if (coinsCollected == 10 ) {
+            Greenfoot.setWorld(new Lobby());
+
+            // Optional: Set a global flag to lock the portal
+            //OverworldPortal.setLocked(true);
+        }
+    }
+}
 }

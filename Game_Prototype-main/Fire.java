@@ -21,6 +21,9 @@ public class Fire extends Actor
         if (isAtEdge()){
             turn(180);
         }
+        if (isTouching(ground.class)){
+            turn(180);
+        }
     }  
     
 }
