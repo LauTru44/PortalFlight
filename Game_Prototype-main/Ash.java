@@ -38,6 +38,8 @@ public class Ash extends Actor
     private long timeFuelEmptied = 0;
     private boolean isCoolingDown = false;
     private int cooldownDuration = 1500; // 5 seconds in milliseconds
+    //level 2
+    private int buttonsPressed = 0;
     
     //for level 3
     private int coinsCollected = 0;
@@ -45,21 +47,32 @@ public class Ash extends Actor
     public void act()
     {
         moveLeftRight();
+        jump();
         useJetpack();         
         applyGravity();      
         checkIfOnGround();
 
         checkCollision();
+        pressedButton();
         rechargeFuel();
         updateFuelBar();
         
         checkCoinPickup();
-         checkIfFellOutOfLevel3();
+        checkIfFellOutOfLevel3();
     }
     
    private void moveLeftRight() {
         if (Greenfoot.isKeyDown("a")) {
             setLocation(getX() - speed, getY());
+            
+            if(isTouching(Wall.class))
+            {
+                setLocation(getX() + speed, getY());
+            }
+            if(isTouching(Door.class))
+            {
+                setLocation(getX() + speed, getY());
+            }
         
             if (onGround==false && Greenfoot.isKeyDown("space")) {
                 setImage(Fly2); // flying to the left
@@ -80,6 +93,15 @@ public class Ash extends Actor
         
         if (Greenfoot.isKeyDown("d")) {
             setLocation(getX() + speed, getY());
+            
+            if(isTouching(Wall.class))
+            {
+                setLocation(getX() - speed, getY());
+            }
+            if(isTouching(Door.class))
+            {
+                setLocation(getX() - speed, getY());
+            }
         
             if (onGround == false && Greenfoot.isKeyDown("space")) {
                 setImage(Fly1); // flying to the right
@@ -167,39 +189,46 @@ public class Ash extends Actor
     {
         //for level 1
         Fire fireball = (Fire) getOneIntersectingObject(Fire.class);
-        double timeSplashScreen = System.currentTimeMillis();
         if (fireball != null) {
-            getWorld().addObject(new Ash() , getX(), getY());
-            getWorld().stopped();
-            GameOver gameOver = new GameOver();
-            gameOver.started();
-            Greenfoot.setWorld(gameOver); 
-            
+            Greenfoot.setWorld(new GameOver()); 
         }
     }
     
     private void checkCoinPickup() {
-    Coin coin = (Coin) getOneIntersectingObject(Coin.class);
-    if (coin != null) {
-        getWorld().removeObject(coin);
-        coinsCollected++;
-        getWorld().stopped();
-        TheEnd theEnd = new TheEnd();
-        theEnd.started();
+        Coin coin = (Coin) getOneIntersectingObject(Coin.class);
+        if (coin != null) {
+            getWorld().removeObject(coin);
+            coinsCollected++;
 
-        if (coinsCollected == 10 ) {
-            Greenfoot.setWorld(new Lobby());
-            OverworldPortal.setLocked(true);
-            
-        }
-    }
-    }
-    
-        private void checkIfFellOutOfLevel3(){
-        if(getWorld() instanceof Level3){
-            if (getY()>= getWorld().getHeight()-1){
-              Greenfoot.setWorld(new GameOver());  
+            if (coinsCollected == 10 ) {
+                Greenfoot.setWorld(new Lobby());
+                OverworldPortal.setLocked(true);
             }
         }
     }
-}
+    
+    private void pressedButton()
+    {
+        Button button = (Button) getOneIntersectingObject(Button.class);
+        if (button != null) 
+        {
+            buttonsPressed += 1;
+            getWorld().removeObject(button);
+        }
+        
+        if (buttonsPressed == 12 ) 
+        {
+            Greenfoot.setWorld(new Lobby());
+            CavePortal.setLocked(true);
+        }
+    }
+    
+    private void checkIfFellOutOfLevel3(){
+         if(getWorld() instanceof Level3){
+             if (getY()>= getWorld().getHeight()-1){
+               Greenfoot.setWorld(new GameOver());  
+             }
+    
+            }
+        }
+    }
