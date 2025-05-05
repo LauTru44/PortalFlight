@@ -22,7 +22,7 @@ public class Level extends World
         super(1000, 550, 1); 
         prepare();
         showTimer();
-        gameMusic = new GreenfootSound("level2");
+        gameMusic = new GreenfootSound("level2.wav");
     }
 
     /**

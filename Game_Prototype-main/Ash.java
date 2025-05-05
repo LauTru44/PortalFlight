@@ -54,6 +54,7 @@ public class Ash extends Actor
         updateFuelBar();
         
         checkCoinPickup();
+         checkIfFellOutOfLevel3();
     }
     
    private void moveLeftRight() {
@@ -192,5 +193,13 @@ public class Ash extends Actor
             
         }
     }
+    }
+    
+        private void checkIfFellOutOfLevel3(){
+        if(getWorld() instanceof Level3){
+            if (getY()>= getWorld().getHeight()-1){
+              Greenfoot.setWorld(new GameOver());  
+            }
+        }
     }
 }
