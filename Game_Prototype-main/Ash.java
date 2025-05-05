@@ -44,6 +44,7 @@ public class Ash extends Actor
     
     public void act()
     {
+        jump();
         moveLeftRight();
         useJetpack();         
         applyGravity();      
@@ -54,6 +55,8 @@ public class Ash extends Actor
         updateFuelBar();
         
         checkCoinPickup();
+        checkIfFellOutOfLevel3();
+        
     }
     
    private void moveLeftRight() {
@@ -166,10 +169,16 @@ public class Ash extends Actor
     {
         //for level 1
         Fire fireball = (Fire) getOneIntersectingObject(Fire.class);
-        double timeSplashScreen = System.currentTimeMillis();
         if (fireball != null) {
-            getWorld().addObject(new Ash() , getX(), getY());
             Greenfoot.setWorld(new GameOver()); 
+        }
+    }
+    
+    private void checkIfFellOutOfLevel3(){
+        if(getWorld() instanceof Level3){
+            if (getY()>= getWorld().getHeight()-1){
+              Greenfoot.setWorld(new GameOver());  
+            }
         }
     }
     

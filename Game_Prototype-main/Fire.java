@@ -18,7 +18,7 @@ public class Fire extends Actor
         if (Greenfoot.getRandomNumber(100) < 5) {  
             turn(Greenfoot.getRandomNumber(91) - 45);
         }
-        if (isAtEdge()){
+        if (isAtEdge() ){
             turn(180);
         }
         if (isTouching(ground.class)){
