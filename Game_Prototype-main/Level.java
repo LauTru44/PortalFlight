@@ -62,7 +62,9 @@ public class Level extends World
         else 
         {
             showText("Time's up!", 300, 200);
+            LavaPortal.setLocked(true);
             Greenfoot.setWorld(new Lobby());
+            
         } 
 
     }

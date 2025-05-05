@@ -4,9 +4,16 @@ public class CavePortal extends Actor
 {
     private long timeTouched = 0;
     private boolean touchingAsh = false;
+    
+    private static boolean isLocked = false;
 
     public void act()
     {
+        if (isLocked) {
+            setImage("Cave_portal_Locked.png"); 
+            return;
+        }
+        
         if (isTouching(Ash.class)) {
             if (!touchingAsh) {
                 timeTouched = System.currentTimeMillis();
@@ -14,7 +21,7 @@ public class CavePortal extends Actor
             } else {
                 long elapsed = System.currentTimeMillis() - timeTouched;
                 if (elapsed >= 2000) {
-                    Greenfoot.setWorld(new Level2()); // Lava portal goes to Level
+                    Greenfoot.setWorld(new Level2()); // cave portal goes to Level 2
                 }
             }
         } else {
@@ -22,5 +29,12 @@ public class CavePortal extends Actor
             timeTouched = 0;
         }
     }
+    
+    public static void setLocked(boolean locked) {
+        isLocked = locked;
+    }
+    public static boolean isLocked() {
+    return isLocked;
+     }
 }
 

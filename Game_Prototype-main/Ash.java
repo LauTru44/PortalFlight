@@ -15,16 +15,16 @@ public class Ash extends Actor
     private int speed = 4;
     private boolean onGround = false;
     
+    //animation sprites
     private GreenfootImage walk1 = new GreenfootImage("leftWalkingAsh1.png");
     private GreenfootImage walk2 = new GreenfootImage("leftWalkingAsh2.png");
     private GreenfootImage walk3 = new GreenfootImage("rightWalkingAsh1.png");
     private GreenfootImage walk4 = new GreenfootImage("rightWalkingAsh2.png");
+    private GreenfootImage Fly1 = new GreenfootImage("rightFlyingAsh.png");
+    private GreenfootImage Fly2 = new GreenfootImage("leftFlyingAsh.png");
+
     private int animationDelay = 0;  // controls speed of the walkng animation
-    private int animationSpeed = 20; 
-     
-    //portal analisis fields
-    private long timeEnteredPortal = 0;
-    private boolean isTouchingPortal = false;
+    private int animationSpeed = 20;   
     
     //jetpack fields
     private int maxFuel = 80;
@@ -39,6 +39,7 @@ public class Ash extends Actor
     private boolean isCoolingDown = false;
     private int cooldownDuration = 1500; // 5 seconds in milliseconds
     
+    //for level 3
     private int coinsCollected = 0;
     
     public void act()
@@ -57,31 +58,42 @@ public class Ash extends Actor
     
    private void moveLeftRight() {
         if (Greenfoot.isKeyDown("a")) {
-            
             setLocation(getX() - speed, getY());
-            
-            animationDelay++;
-            if (animationDelay >= animationSpeed) {
-            if (getImage() == walk1) {
-                setImage(walk2);
-            } else {
-                setImage(walk1);
-            }
-            animationDelay = 0;
+        
+            if (onGround==false && Greenfoot.isKeyDown("space")) {
+                setImage(Fly2); // flying to the left
+            } 
+            else 
+            {
+                animationDelay++;
+                if (animationDelay >= animationSpeed) {
+                    if (getImage() == walk1) {
+                        setImage(walk2);
+                    } else {
+                        setImage(walk1);
+                    }
+                    animationDelay = 0;
+                }
             }
         }
         
         if (Greenfoot.isKeyDown("d")) {
             setLocation(getX() + speed, getY());
-            animationDelay++;
-            if (animationDelay >= animationSpeed) {
-                
-            if (getImage() == walk3) {
-            setImage(walk4);
-            } else {
-            setImage(walk3);
-            }
-            animationDelay = 0;
+        
+            if (onGround == false && Greenfoot.isKeyDown("space")) {
+                setImage(Fly1); // flying to the right
+            } 
+            else 
+            {
+                animationDelay++;
+                if (animationDelay >= animationSpeed) {
+                    if (getImage() == walk3) {
+                        setImage(walk4);
+                    } else {
+                        setImage(walk3);
+                    }
+                    animationDelay = 0;
+                }
             }
         }
     }
@@ -140,7 +152,8 @@ public class Ash extends Actor
         if (isTouching(ground.class)) {
             onGround = true;
             yVelocity = 0;
-            // Move Ash up until he's no longer sinking into the ground
+            //for jumping correctly
+        
             while (isTouching(ground.class)) {
                 setLocation(getX(), getY() - 1);
             }
@@ -151,15 +164,16 @@ public class Ash extends Actor
     
     private void checkCollision()
     {
+        //for level 1
         Fire fireball = (Fire) getOneIntersectingObject(Fire.class);
         double timeSplashScreen = System.currentTimeMillis();
         if (fireball != null) {
             getWorld().addObject(new Ash() , getX(), getY());
-            Greenfoot.setWorld(new TheEnd()); 
+            Greenfoot.setWorld(new GameOver()); 
         }
     }
     
-        private void checkCoinPickup() {
+    private void checkCoinPickup() {
     Coin coin = (Coin) getOneIntersectingObject(Coin.class);
     if (coin != null) {
         getWorld().removeObject(coin);
@@ -167,10 +181,8 @@ public class Ash extends Actor
 
         if (coinsCollected == 10 ) {
             Greenfoot.setWorld(new Lobby());
-
-            // Optional: Set a global flag to lock the portal
-            //OverworldPortal.setLocked(true);
+            OverworldPortal.setLocked(true);
         }
     }
-}
+    }
 }

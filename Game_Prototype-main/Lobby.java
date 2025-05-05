@@ -43,4 +43,10 @@ public class Lobby extends World
         addObject(exitPortal,756,468);
         exitPortal.setLocation(792,468);
     }
+    
+    public void act(){
+    if (LavaPortal.isLocked() && CavePortal.isLocked() && OverworldPortal.isLocked()) {
+        ExitPortal.setLocked(false);
+    }
+    }
 }
