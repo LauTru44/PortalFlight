@@ -19,7 +19,6 @@ public class Menu extends World
         super(580, 600, 1); 
         prepare();
     }
-    
     /**
      * Prepare the world for the start of the program.
      * That is: create the initial objects and add them to the world.
@@ -27,17 +26,11 @@ public class Menu extends World
     private void prepare()
     {
         PlayButton playButton = new PlayButton();
-        addObject(playButton,280,388);
+        addObject(playButton,290,396);
         CreditsButton creditsButton = new CreditsButton();
-        addObject(creditsButton,284,415);
+        addObject(creditsButton,290,436);
         ControlsButton controlsButton = new ControlsButton();
-        addObject(controlsButton,295,469);
-        creditsButton.setLocation(295,425);
-        playButton.setLocation(295,399);
-        creditsButton.setLocation(295,455);
-        controlsButton.setLocation(295,520);
-        playButton.setLocation(295,424);
-        creditsButton.setLocation(295,455);
-        controlsButton.setLocation(295,483);
+        addObject(controlsButton,290,476);
+        creditsButton.setLocation(290,440);
     }
 }
