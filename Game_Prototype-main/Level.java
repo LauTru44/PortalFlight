@@ -10,6 +10,8 @@ public class Level extends World
 {
     private int Timer = 0;
     private final int timeLimit = 30 * 30;
+    GreenfootSound gameMusic;
+
     /**
      * Constructor for objects of class Level.
      * 
@@ -20,7 +22,7 @@ public class Level extends World
         super(1000, 550, 1); 
         prepare();
         showTimer();
-
+        gameMusic = new GreenfootSound("level2");
     }
 
     /**
@@ -73,5 +75,16 @@ public class Level extends World
         int seconds = Timer / 30;
         showText("Timer: " + seconds, 70,25);
     }
+    
+    public void started()
+    {
+        gameMusic.playLoop();
+    }
+    
+    public void stopped()
+    {
+        gameMusic.stop();
+    }
+
 }
 

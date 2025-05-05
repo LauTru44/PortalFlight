@@ -16,7 +16,10 @@ public class CreditsButton extends Actor
 
         if (Greenfoot.mouseClicked(this))
         {
-            Greenfoot.setWorld(new CreditsMenu()); 
+            getWorld().stopped();
+            CreditsMenu creditsMenu = new CreditsMenu();
+            creditsMenu.started();
+            Greenfoot.setWorld(creditsMenu);  
         }
     }
 }

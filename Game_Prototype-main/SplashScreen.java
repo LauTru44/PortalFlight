@@ -9,6 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class SplashScreen extends World
 {
     double timeSplashScreen = System.currentTimeMillis();
+    GreenfootSound gameMusic_Splash;
     /**
      * Constructor for objects of class SplashScreen.
      * 
@@ -18,6 +19,7 @@ public class SplashScreen extends World
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(580, 600, 1); 
         prepare();
+        gameMusic_Splash = new GreenfootSound("level2.wav");
     }
 
     public void act()
@@ -39,5 +41,15 @@ public class SplashScreen extends World
         ClickToStart clickToStart = new ClickToStart();
         addObject(clickToStart,240,476);
         clickToStart.setLocation(295,480);
+    }
+    
+    public void started()
+    {
+        gameMusic_Splash.playLoop();
+    }
+    
+    public void stopped()
+    {
+        gameMusic_Splash.stop();
     }
 }

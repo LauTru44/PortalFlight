@@ -16,7 +16,10 @@ public class PlayButton extends Actor
 
         if (Greenfoot.mouseClicked(this))
         {
-            Greenfoot.setWorld(new Lobby()); 
+            getWorld().stopped();
+            Lobby lobby = new Lobby();
+            lobby.started();
+            Greenfoot.setWorld(lobby);
         }
     }
 }

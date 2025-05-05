@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Level3 extends World
 {
-    
+    GreenfootSound gameMusic_level3;
     /**
      * Constructor for objects of class Level3.
      * 
@@ -18,7 +18,7 @@ public class Level3 extends World
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(1000, 550, 1); 
         prepare();
-        
+        gameMusic_level3 = new GreenfootSound("level2.wav");
         
     }
     
@@ -59,5 +59,13 @@ public class Level3 extends World
         addObject(coin10,396,252);
     }
     
-
+    public void started()
+    {
+        gameMusic_level3.playLoop();
+    }
+    
+    public void stopped()
+    {
+        gameMusic_level3.stop();
+    }
 }

@@ -10,7 +10,7 @@ public class ExitPortal extends LavaPortal
 {
     private long timeTouched = 0;
     private boolean touchingAsh = false;
-    
+
     private static boolean isLocked = true;
 
     public void act()
@@ -18,7 +18,7 @@ public class ExitPortal extends LavaPortal
         if (isLocked == false) {
             setImage("Exit_portal.png"); // unlocks the exit
         }
-        
+
         if (isTouching(Ash.class) && (isLocked==false)) {
             if (touchingAsh==false) {
                 timeTouched = System.currentTimeMillis();
@@ -26,7 +26,10 @@ public class ExitPortal extends LavaPortal
             } else {
                 long elapsed = System.currentTimeMillis() - timeTouched;
                 if (elapsed >= 2000) {
-                    Greenfoot.setWorld(new TheEnd()); // Finishes game!!
+                    getWorld().stopped();
+                    TheEnd theEnd = new TheEnd();
+                    theEnd.started();
+                    Greenfoot.setWorld(theEnd);// Finishes game!!
                 }
             }
         } else {
@@ -34,7 +37,7 @@ public class ExitPortal extends LavaPortal
             timeTouched = 0;
         }
     }
-        
+
     public static void setLocked(boolean locked) {
         isLocked = locked;
     }

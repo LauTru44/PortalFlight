@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Lobby extends World
 {
-
+    GreenfootSound gameMusic_Lobby;
     /**
      * Constructor for objects of class Lobby.
      * 
@@ -18,6 +18,7 @@ public class Lobby extends World
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(1000, 600, 1); 
         prepare();
+        gameMusic_Lobby = new GreenfootSound("level3.wav");
     }
     
     /**
@@ -48,5 +49,16 @@ public class Lobby extends World
     if (LavaPortal.isLocked() && CavePortal.isLocked() && OverworldPortal.isLocked()) {
         ExitPortal.setLocked(false);
     }
+    }
+    
+    
+    public void started()
+    {
+        gameMusic_Lobby.playLoop();
+    }
+    
+    public void stopped()
+    {
+        gameMusic_Lobby.stop();
     }
 }

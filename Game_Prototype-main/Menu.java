@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Menu extends World
 {
-
+    GreenfootSound gameMusic_Menu;
     /**
      * Constructor for objects of class Menu.
      * 
@@ -18,6 +18,7 @@ public class Menu extends World
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(580, 600, 1); 
         prepare();
+        gameMusic_Menu = new GreenfootSound("level2.wav");
     }
     /**
      * Prepare the world for the start of the program.
@@ -32,5 +33,15 @@ public class Menu extends World
         ControlsButton controlsButton = new ControlsButton();
         addObject(controlsButton,290,476);
         creditsButton.setLocation(290,440);
+    }
+    
+    public void started()
+    {
+        gameMusic_Menu.playLoop();
+    }
+    
+    public void stopped()
+    {
+        gameMusic_Menu.stop();
     }
 }

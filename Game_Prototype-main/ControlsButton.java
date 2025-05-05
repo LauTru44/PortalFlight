@@ -16,7 +16,11 @@ public class ControlsButton extends Actor
 
         if (Greenfoot.mouseClicked(this))
         {
-            Greenfoot.setWorld(new ControlsMenu()); 
+            getWorld().stopped();
+            ControlsMenu controlsMenu = new ControlsMenu();
+            controlsMenu.started();
+            Greenfoot.setWorld(controlsMenu); 
+ 
         }
     }
 }
