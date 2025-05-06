@@ -68,6 +68,10 @@ public class Level2 extends World
         addObject(flippedButton6,771,177);
         FlippedButton flippedButton7 = new FlippedButton();
         addObject(flippedButton7,772,346);
+        Door door = new Door();
+        addObject(door,869,479);
+        Key key = new Key();
+        addObject(key,378,80);
     }
     
     

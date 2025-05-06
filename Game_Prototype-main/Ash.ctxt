@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Ash
-comment0.text=\n\ Write\ a\ description\ of\ class\ character\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ character\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
 comment1.params=
 comment1.target=void\ act()
 comment10.params=
@@ -8,7 +8,11 @@ comment10.target=void\ checkCoinPickup()
 comment11.params=
 comment11.target=void\ pressedButton()
 comment12.params=
-comment12.target=void\ checkIfFellOutOfLevel3()
+comment12.target=void\ checkKeyPickup()
+comment13.params=
+comment13.target=void\ checkDoor()
+comment14.params=
+comment14.target=void\ checkIfFellOutOfLevel3()
 comment2.params=
 comment2.target=void\ moveLeftRight()
 comment3.params=
@@ -25,4 +29,4 @@ comment8.params=
 comment8.target=void\ checkIfOnGround()
 comment9.params=
 comment9.target=void\ checkCollision()
-numComments=13
+numComments=15
