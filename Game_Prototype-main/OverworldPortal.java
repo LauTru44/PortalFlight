@@ -23,7 +23,10 @@ public class OverworldPortal extends LavaPortal
             } else {
                 long elapsed = System.currentTimeMillis() - timeTouched;
                 if (elapsed >= 2000) {
-                    Greenfoot.setWorld(new Level3()); // overworld portal goes to Level3
+                    getWorld().stopped();
+                    Level3 level3 = new Level3();
+                    level3.started();
+                    Greenfoot.setWorld(level3);// overworld portal goes to Level3
                 }
             }
         } else {

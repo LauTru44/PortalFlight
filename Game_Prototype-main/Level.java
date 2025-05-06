@@ -65,8 +65,12 @@ public class Level extends World
         {
             showText("Time's up!", 300, 200);
             LavaPortal.setLocked(true);
-            Greenfoot.setWorld(new Lobby());
-            
+            this.stopped();
+            Lobby lobby = new Lobby();
+            lobby.started();
+            Greenfoot.setWorld(lobby);
+            LavaPortal.setLocked(true);
+
         } 
 
     }
@@ -75,12 +79,12 @@ public class Level extends World
         int seconds = Timer / 30;
         showText("Timer: " + seconds, 70,25);
     }
-    
+
     public void started()
     {
         gameMusic.playLoop();
     }
-    
+
     public void stopped()
     {
         gameMusic.stop();

@@ -39,7 +39,7 @@ public class Ash extends Actor
     private long timeFuelEmptied = 0;
     private boolean isCoolingDown = false;
     private int cooldownDuration = 1500; // 5 seconds in milliseconds
-    
+
     //level 2
     private int buttonsPressed = 0;
     private boolean hasKey = false;
@@ -58,7 +58,7 @@ public class Ash extends Actor
         checkCollision();
         rechargeFuel();
         updateFuelBar();
-        
+
         pressedButton();
         checkKeyPickup();
         checkDoor();
@@ -209,7 +209,10 @@ public class Ash extends Actor
             coinsCollected++;
 
             if (coinsCollected == 10 ) {
-                Greenfoot.setWorld(new Lobby());
+                getWorld().stopped();
+                Lobby lobby = new Lobby();
+                lobby.started();
+                Greenfoot.setWorld(lobby);
                 OverworldPortal.setLocked(true);
             }
         }
@@ -224,7 +227,7 @@ public class Ash extends Actor
             getWorld().removeObject(button);
         }
     }
-    
+
     private void checkKeyPickup()
     {
         Key key = (Key) getOneIntersectingObject(Key.class);
@@ -238,7 +241,10 @@ public class Ash extends Actor
     private void checkDoor() {
         Door door = (Door) getOneIntersectingObject(Door.class);
         if (door != null && hasKey == true && buttonsPressed == 12) {
-            Greenfoot.setWorld(new Lobby());
+            getWorld().stopped();
+            Lobby lobby = new Lobby();
+            lobby.started();
+            Greenfoot.setWorld(lobby);
             CavePortal.setLocked(true);
         }
     }

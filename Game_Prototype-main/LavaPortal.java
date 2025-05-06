@@ -4,7 +4,7 @@ public class LavaPortal extends Actor
 {
     private long timeTouched = 0;
     private boolean touchingAsh = false;
-    
+
     private static boolean isLocked = false;
 
     public void act()
@@ -13,7 +13,7 @@ public class LavaPortal extends Actor
             setImage("Fire_portal_Locked.png"); // imagen gris
             return;
         }
-        
+
         if (isTouching(Ash.class)) {
             if (!touchingAsh) {
                 timeTouched = System.currentTimeMillis();
@@ -21,7 +21,10 @@ public class LavaPortal extends Actor
             } else {
                 long elapsed = System.currentTimeMillis() - timeTouched;
                 if (elapsed >= 2000) {
-                    Greenfoot.setWorld(new Level()); // Lava portal goes to Level
+                    getWorld().stopped();
+                    Level level = new Level();
+                    level.started();
+                    Greenfoot.setWorld(level);// Lava portal goes to Level
                 }
             }
         } else {
@@ -29,13 +32,13 @@ public class LavaPortal extends Actor
             timeTouched = 0;
         }
     }
-        
+
     public static void setLocked(boolean locked) {
         isLocked = locked;
     }
-    
+
     public static boolean isLocked() {
-    return isLocked;
+        return isLocked;
     }
 
 }

@@ -21,7 +21,10 @@ public class CavePortal extends Actor
             } else {
                 long elapsed = System.currentTimeMillis() - timeTouched;
                 if (elapsed >= 2000) {
-                    Greenfoot.setWorld(new Level2()); // cave portal goes to Level 2
+                    getWorld().stopped();
+                    Level2 level2 = new Level2();
+                    level2.started();
+                    Greenfoot.setWorld(level2);// cave portal goes to Level 2
                 }
             }
         } else {
