@@ -18,7 +18,7 @@ public class ControlsMenu extends World
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(540, 645, 1); 
         prepare();
-        gameMusic_ConMenu = new GreenfootSound("level2.wav");
+        gameMusic_ConMenu = new GreenfootSound("CREDITS.mp3");
     }
     /**
      * Prepare the world for the start of the program.

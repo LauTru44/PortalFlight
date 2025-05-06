@@ -26,7 +26,10 @@ public class BackButton extends Actor
 
         if (Greenfoot.mouseClicked(this))
         {
-            Greenfoot.setWorld(new Menu()); 
+            getWorld().stopped();
+            Menu menu = new Menu();
+            menu.started();
+            Greenfoot.setWorld(menu);
         }
     }
 }

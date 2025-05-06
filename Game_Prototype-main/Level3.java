@@ -18,7 +18,7 @@ public class Level3 extends World
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(1000, 550, 1); 
         prepare();
-        gameMusic_level3 = new GreenfootSound("level2.wav");
+        gameMusic_level3 = new GreenfootSound("LEVEL3.mp3");
         
     }
     

@@ -19,7 +19,7 @@ public class CreditsMenu extends World
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(364, 545, 1); 
         prepare();
-        gameMusic_CreMenu = new GreenfootSound("level2.wav");
+        gameMusic_CreMenu = new GreenfootSound("CREDITS.mp3");
     }
     /**
      * Prepare the world for the start of the program.

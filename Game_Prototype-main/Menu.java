@@ -18,7 +18,7 @@ public class Menu extends World
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(580, 600, 1); 
         prepare();
-        gameMusic_Menu = new GreenfootSound("level2.wav");
+        gameMusic_Menu = new GreenfootSound("MENU.mp3");
     }
     /**
      * Prepare the world for the start of the program.

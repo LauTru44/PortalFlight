@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Level2 extends World
 {
-
+    GreenfootSound gameMusic_Level2;
     /**
      * Constructor for objects of class Level2.
      * 
@@ -17,7 +17,9 @@ public class Level2 extends World
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(1000, 600, 1); 
-        prepare();
+        prepare(); 
+        gameMusic_Level2 = new GreenfootSound("LEVEL2.mp3");
+
     }
     
     /**
@@ -67,4 +69,16 @@ public class Level2 extends World
         FlippedButton flippedButton7 = new FlippedButton();
         addObject(flippedButton7,772,346);
     }
+    
+    
+    public void started()
+    {
+        gameMusic_Level2.playLoop();
+    }
+    
+    public void stopped()
+    {
+        gameMusic_Level2.stop();
+    }
+
 }
